@@ -6,7 +6,7 @@ use blitzik\Authorization\Authorizator\AuthorizationAssertionsCollection;
 use blitzik\Authorization\Authorizator\IAuthorizationAssertion;
 use blitzik\Authorization\Authorizator\Authorizator;
 use Kdyby\Doctrine\DI\IEntityProvider;
-use App\Extensions\CompilerExtension;
+use Nette\DI\CompilerExtension;
 
 
 class AuthorizationExtension extends CompilerExtension implements IEntityProvider

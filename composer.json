@@ -1,6 +1,6 @@
 {
   "name": "blitzik/authorization",
-  "description": "Dynamic ACL for Nette framework",
+  "description": "Doctrine based dynamic ACL for Nette framework",
   "keywords": ["nette", "authorization", "acl"],
   "license": ["MIT"],
   "authors": [
@@ -13,6 +13,7 @@
   "require": {
     "php": ">=7.0",
     "kdyby/doctrine": "dev-master",
+    "nette/di": "^2.4",
     "nette/security": "^2.4",
     "nette/caching": "^2.5"
   },
