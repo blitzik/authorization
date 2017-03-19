@@ -1,0 +1,25 @@
+{
+  "name": "blitzik/authorization",
+  "description": "Dynamic ACL for Nette framework",
+  "keywords": ["nette", "authorization", "acl"],
+  "license": ["MIT"],
+  "authors": [
+    {
+      "name": "Aleš Tichava",
+      "email": "ales.tichava@gmail.com"
+    }
+  ],
+
+  "require": {
+    "php": ">=7.0",
+    "kdyby/doctrine": "dev-master",
+    "nette/security": "^2.4",
+    "nette/caching": "^2.5"
+  },
+
+
+  "autoload": {
+    "classmap": ["src/"]
+  }
+
+}
