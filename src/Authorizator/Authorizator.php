@@ -69,9 +69,9 @@ class Authorizator implements IAuthorizator
 
     /**
      * @param \Nette\Security\User|IRole|Role|string $role
-     * @return array
+     * @return mixed
      */
-    private function resolveRole($role): array
+    private function resolveRole($role)
     {
         $_role = null;
         if (Validators::is($role, 'unicode')) {
