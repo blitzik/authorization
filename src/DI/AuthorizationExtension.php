@@ -20,6 +20,16 @@ class AuthorizationExtension extends CompilerExtension implements IEntityProvide
 
         $assertionCollection = $cb->addDefinition($this->prefix('authorizationAssertionsCollection'));
         $assertionCollection->setClass(AuthorizationAssertionsCollection::class);
+    }
+
+
+    public function beforeCompile()
+    {
+        $cb = $this->getContainerBuilder();
+
+        $assertionCollection = $cb->getDefinition($this->prefix('authorizationAssertionsCollection'));
+        $authorizator = $cb->getDefinition($this->prefix('authorizator'));
+
         foreach ($cb->findByType(IAuthorizationAssertion::class) as $assertion) {
             $assertionCollection->addSetup('addAssertion', ['assertion' => $assertion]);
         }
