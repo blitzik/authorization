@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use blitzik\Authorization\AccessDefinition;
 use blitzik\Authorization\Permission;
 use blitzik\Authorization\Privilege;
+use blitzik\Authorization\Resource;
 use Kdyby\Doctrine\EntityManager;
 use blitzik\Authorization\Role;
 use Nette\SmartObject;
@@ -41,11 +42,11 @@ class AuthorizationRulesGenerator
 
 
     /**
-     * @param \Users\Authorization\Resource $resource
+     * @param Resource $resource
      * @param string|null $fixtureObjectReferenceName
      * @return AuthorizationRulesGenerator
      */
-    public function addResource(\Users\Authorization\Resource $resource, $fixtureObjectReferenceName = null): AuthorizationRulesGenerator
+    public function addResource(Resource $resource, $fixtureObjectReferenceName = null): AuthorizationRulesGenerator
     {
         $this->em->persist($resource);
         $this->resource = $resource;
@@ -59,10 +60,10 @@ class AuthorizationRulesGenerator
 
 
     /**
-     * @param \Users\Authorization\Resource $resource
+     * @param Resource $resource
      * @return AuthorizationRulesGenerator
      */
-    public function updateResource(\Users\Authorization\Resource $resource): AuthorizationRulesGenerator
+    public function updateResource(Resource $resource): AuthorizationRulesGenerator
     {
        $this->resource = $resource;
         return $this;
