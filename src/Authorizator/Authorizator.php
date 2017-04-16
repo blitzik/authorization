@@ -137,7 +137,7 @@ class Authorizator implements IAuthorizator
             'SELECT r FROM ' . Resource::class . ' r'
         )->execute();
 
-        /** @var \Users\Authorization\Resource $resource */
+        /** @var Resource $resource */
         foreach ($resources as $resource) {
             $acl->addResource($resource->getName());
         }
@@ -151,7 +151,7 @@ class Authorizator implements IAuthorizator
              LEFT JOIN p.privilege pr'
         )->execute();
 
-        /** @var \Users\Authorization\Permission $permission */
+        /** @var \blitzik\Authorization\Permission $permission */
         foreach ($permissions as $permission) {
             if ($permission->isAllowed() === true) {
                 $assertion = $this->assertionsCollection->getAssertionForAllowed($permission->getResourceName(), $permission->getPrivilegeName());
