@@ -4,7 +4,6 @@ namespace blitzik\Authorization\Authorizator;
 
 use Nette\Security\Permission;
 
-
 /**
  * Class that implements this interface just adds
  * specific Roles, Resources and privileges to ACL
@@ -39,7 +38,7 @@ interface IAuthorizationAssertion
      * @param $role
      * @param $resource
      * @param $privilege
-     * @return mixed
+     * @return bool
      */
-    public function assert(Permission $acl, $role, $resource, $privilege);
+    public function assert(Permission $acl, $role, $resource, $privilege): bool;
 }

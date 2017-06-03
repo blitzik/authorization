@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
 use Nette\Utils\Validators;
 
-
 /**
  * @ORM\Entity
  * @ORM\Table(name="privilege")
@@ -38,7 +37,7 @@ class Privilege
     }
 
 
-    private function setName(string $name)
+    private function setName(string $name): void
     {
         Validators::assert($name, 'unicode:1..255');
         $this->name = $name;

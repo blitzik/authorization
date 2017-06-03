@@ -11,7 +11,6 @@ use Kdyby\Doctrine\EntityManager;
 use blitzik\Authorization\Role;
 use Nette\SmartObject;
 
-
 class AuthorizationRulesGenerator
 {
     use SmartObject;
@@ -32,21 +31,13 @@ class AuthorizationRulesGenerator
     }
 
 
-    /**
-     * @param AbstractFixture $fixture
-     */
-    public function setFixture(AbstractFixture $fixture)
+    public function setFixture(AbstractFixture $fixture): void
     {
         $this->fixture = $fixture;
     }
 
 
-    /**
-     * @param Resource $resource
-     * @param string|null $fixtureObjectReferenceName
-     * @return AuthorizationRulesGenerator
-     */
-    public function addResource(Resource $resource, $fixtureObjectReferenceName = null): AuthorizationRulesGenerator
+    public function addResource(Resource $resource, string $fixtureObjectReferenceName = null): AuthorizationRulesGenerator
     {
         $this->em->persist($resource);
         $this->resource = $resource;
@@ -59,10 +50,6 @@ class AuthorizationRulesGenerator
     }
 
 
-    /**
-     * @param Resource $resource
-     * @return AuthorizationRulesGenerator
-     */
     public function updateResource(Resource $resource): AuthorizationRulesGenerator
     {
        $this->resource = $resource;
@@ -70,11 +57,6 @@ class AuthorizationRulesGenerator
     }
 
 
-    /**
-     * @param Privilege $privilege
-     * @param Role $role
-     * @return AuthorizationRulesGenerator
-     */
     public function addDefinition(Privilege $privilege, Role $role): AuthorizationRulesGenerator
     {
         $accessDefinition = new AccessDefinition($this->resource, $privilege);

@@ -15,7 +15,6 @@ use Nette\Security\IRole;
 use Nette\Caching\Cache;
 use Nette\SmartObject;
 
-
 class Authorizator implements IAuthorizator
 {
     use SmartObject;
@@ -114,7 +113,7 @@ class Authorizator implements IAuthorizator
     }
 
 
-    private function loadRoles(Permission $acl)
+    private function loadRoles(Permission $acl): void
     {
         $roles = $this->em->createQuery(
             'SELECT r, parent FROM ' . Role::class . ' r
@@ -131,7 +130,7 @@ class Authorizator implements IAuthorizator
     }
 
 
-    private function loadResources(Permission $acl)
+    private function loadResources(Permission $acl): void
     {
         $resources = $this->em->createQuery(
             'SELECT r FROM ' . Resource::class . ' r'
@@ -144,7 +143,7 @@ class Authorizator implements IAuthorizator
     }
 
 
-    private function loadPermissions(Permission $acl)
+    private function loadPermissions(Permission $acl): void
     {
         $permissions = $this->em->createQuery(
             'SELECT p, pr FROM ' . \blitzik\Authorization\Permission::class . ' p

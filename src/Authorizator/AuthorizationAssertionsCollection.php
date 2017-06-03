@@ -4,7 +4,6 @@ namespace blitzik\Authorization\Authorizator;
 
 use Nette\SmartObject;
 
-
 class AuthorizationAssertionsCollection
 {
     use SmartObject;
@@ -14,7 +13,7 @@ class AuthorizationAssertionsCollection
     private $definitions = [];
 
 
-    public function addAssertion(IAuthorizationAssertion $assertion)
+    public function addAssertion(IAuthorizationAssertion $assertion): void
     {
         foreach ($assertion->getPrivilegeNames() as $privilegeName) {
             $this->definitions[$assertion->getResourceName()]
@@ -29,7 +28,7 @@ class AuthorizationAssertionsCollection
      * @param $privilege
      * @return IAuthorizationAssertion|null
      */
-    public function getAssertionForAllowed($resource, $privilege)
+    public function getAssertionForAllowed($resource, $privilege): ?IAuthorizationAssertion
     {
         if (isset($this->definitions[$resource][true][$privilege])) {
             return $this->definitions[$resource][true][$privilege];
@@ -44,7 +43,7 @@ class AuthorizationAssertionsCollection
      * @param $privilege
      * @return IAuthorizationAssertion|null
      */
-    public function getAssertionForDenied($resource, $privilege)
+    public function getAssertionForDenied($resource, $privilege): ?IAuthorizationAssertion
     {
         if (isset($this->definitions[$resource][false][$privilege])) {
             return $this->definitions[$resource][false][$privilege];

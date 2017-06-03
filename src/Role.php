@@ -6,7 +6,7 @@ use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
-
+use Nette\Utils\Validators;
 
 /**
  * @ORM\Entity
@@ -47,11 +47,9 @@ class Role
     }
 
 
-    /**
-     * @param string $name
-     */
-    private function setName(string $name)
+    private function setName(string $name): void
     {
+        Validators::assert($name, 'unicode:1..255');
         $this->name = $name;
     }
 
@@ -75,10 +73,7 @@ class Role
      */
 
 
-    /**
-     * @return Role|null
-     */
-    public function getParent()
+    public function getParent(): ?Role
     {
         return $this->parent;
     }

@@ -8,10 +8,9 @@ use blitzik\Authorization\Authorizator\Authorizator;
 use Kdyby\Doctrine\DI\IEntityProvider;
 use Nette\DI\CompilerExtension;
 
-
 class AuthorizationExtension extends CompilerExtension implements IEntityProvider
 {
-    public function loadConfiguration()
+    public function loadConfiguration(): void
     {
         $cb = $this->getContainerBuilder();
 
@@ -23,7 +22,7 @@ class AuthorizationExtension extends CompilerExtension implements IEntityProvide
     }
 
 
-    public function beforeCompile()
+    public function beforeCompile(): void
     {
         $cb = $this->getContainerBuilder();
 
@@ -37,7 +36,7 @@ class AuthorizationExtension extends CompilerExtension implements IEntityProvide
     }
 
 
-    function getEntityMappings()
+    function getEntityMappings(): array
     {
         return ['blitzik\Authorization' => __DIR__ . '/..'];
     }
