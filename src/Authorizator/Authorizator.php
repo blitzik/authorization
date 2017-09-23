@@ -7,6 +7,7 @@ use Nette\Security\IAuthorizator;
 use Kdyby\Doctrine\EntityManager;
 use Nette\InvalidStateException;
 use blitzik\Authorization\Role;
+use Nette\Security\IIdentity;
 use Nette\Security\Permission;
 use Nette\Security\IResource;
 use Nette\Caching\IStorage;
@@ -87,6 +88,11 @@ class Authorizator implements IAuthorizator
 
         } elseif ($role instanceof IRole) {
             $roles[] = $role;
+
+        } elseif ($role instanceof IIdentity) {
+            foreach ($role->getRoles() as $i_role) {
+                $roles[] = $i_role;
+            }
 
         } elseif ($role instanceof \Nette\Security\User) {
             $identity = $role->getIdentity(); // identity is User entity that implements IRole interface
