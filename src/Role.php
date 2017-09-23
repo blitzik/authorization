@@ -7,12 +7,13 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
 use Nette\Utils\Validators;
+use Nette\Security\IRole;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="role")
  */
-class Role
+class Role implements IRole
 {
     use Identifier;
 
@@ -77,5 +78,15 @@ class Role
     {
         return $this->parent;
     }
+
+
+    // -----
+
+
+    function getRoleId()
+    {
+        return $this->getName();
+    }
+
 
 }

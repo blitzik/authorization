@@ -45,7 +45,7 @@ class Authorizator implements IAuthorizator
         $this->cache = new Cache($storage, self::CACHE_NAMESPACE);
         $this->acl = $this->loadACL();
     }
-    
+
 
     /**
      * @param \Nette\Security\User|IRole|Role|string $role
@@ -55,41 +55,50 @@ class Authorizator implements IAuthorizator
      */
     public function isAllowed($role, $resource, $privilege): bool
     {
-        $_role = $this->resolveRole($role);
+        $roles = $this->resolveRoles($role);
 
         try {
-            return $this->acl->isAllowed($_role, $resource, $privilege);
+            foreach ($roles as $_role) {
+                if ($this->acl->isAllowed($_role, $resource, $privilege) === true) {
+                    return true;
+                }
+            }
 
         } catch (InvalidStateException $e) {
             return false; // role does not exists
         }
+
+        return false;
     }
 
 
     /**
      * @param \Nette\Security\User|IRole|Role|string $role
-     * @return mixed
+     * @return array
      */
-    private function resolveRole($role)
+    private function resolveRoles($role): array
     {
-        $_role = null;
+        $roles = [];
         if (Validators::is($role, 'unicode')) {
-            $_role = $role;
+            $roles[] = $role;
 
         } elseif ($role instanceof Role) {
-            $_role = $role->getName();
+            $roles[] = $role->getName();
 
         } elseif ($role instanceof IRole) {
-            $_role = $role;
+            $roles[] = $role;
 
         } elseif ($role instanceof \Nette\Security\User) {
-            $_role = $role->getIdentity(); // identity is User entity that implements IRole interface
+            $identity = $role->getIdentity(); // identity is User entity that implements IRole interface
+            foreach ($identity->getRoles() as $i_role) {
+                $roles[] = $i_role;
+            }
 
         } else {
             throw new \InvalidArgumentException;
         }
 
-        return $_role;
+        return $roles;
     }
 
 
